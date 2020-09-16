@@ -20,7 +20,6 @@ class AddTaskScreen extends StatelessWidget {
     Navigator.pop(context);
   }
 
-
   @override
   Widget build(BuildContext context) {
     var nameController = TextEditingController(text: "");
@@ -116,28 +115,24 @@ class ViewTaskScreenState extends State<ViewTasksScreen> {
 
   removeToDoItem(int index) {
     showDialog(
-      context: context,
-      builder: (BuildContext context){
-        return new AlertDialog(
-          title: new Text('Mark "${todoList[index]}" as done?}'), backgroundColor: Colors.orange,
-          actions: <Widget>[
-            new FlatButton(
-              child: new Text('CANCEL'),
-              onPressed: () => Navigator.of(context).pop()
-            ),
-            new FlatButton(
-                child: new Text('MARK AS DONE'),
-                onPressed: (){
-                  removeTodoItem(index);
-                  Navigator.of(context).pop();
-                }
-            )
-          ]
-        );
-      }
-    );
+        context: context,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+              title: new Text('Mark "${todoList[index]}" as done?}'),
+              backgroundColor: Colors.orange,
+              actions: <Widget>[
+                new FlatButton(
+                    child: new Text('CANCEL'),
+                    onPressed: () => Navigator.of(context).pop()),
+                new FlatButton(
+                    child: new Text('MARK AS DONE'),
+                    onPressed: () {
+                      removeTodoItem(index);
+                      Navigator.of(context).pop();
+                    })
+              ]);
+        });
   }
-
 }
 
 class ToDoWidget extends StatefulWidget {
