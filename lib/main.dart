@@ -133,6 +133,24 @@ class ViewTaskScreenState extends State<ViewTasksScreen> {
               ]);
         });
   }
+
+  Widget buildTodoList(){
+    return new ListView.builder(
+      itemBuilder: (context, index){
+        if(index < todoList.length){
+          return buildTodoItem(todoList[index], index);
+        }
+      },
+    );
+  }
+
+  Widget buildTodoItem(String todoText, int index){
+    return new ListTile(
+      title: new Text(todoText),
+      onTap: removeToDoItem(index),
+    );
+  }
+
 }
 
 class ToDoWidget extends StatefulWidget {
