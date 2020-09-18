@@ -144,7 +144,7 @@ class ViewTaskScreenState extends State<ViewTasksScreen> {
     );
   }
 
-  Widget buildTodoItem(String todoText, int index){
+  Widget buildTodoItem(todoText, int index){
     return new ListTile(
       title: new Text(todoText),
       onTap: removeToDoItem(index),
