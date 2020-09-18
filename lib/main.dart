@@ -109,47 +109,7 @@ class ViewTaskScreenState extends State<ViewTasksScreen> {
     ));
   }
 
-  removeTodoItem(int index) {
-    setState(() => todoList.removeAt(index));
-  }
 
-  removeToDoItem(int index) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return new AlertDialog(
-              title: new Text('Mark "${todoList[index]}" as done?}'),
-              backgroundColor: Colors.orange,
-              actions: <Widget>[
-                new FlatButton(
-                    child: new Text('CANCEL'),
-                    onPressed: () => Navigator.of(context).pop()),
-                new FlatButton(
-                    child: new Text('MARK AS DONE'),
-                    onPressed: () {
-                      removeTodoItem(index);
-                      Navigator.of(context).pop();
-                    })
-              ]);
-        });
-  }
-
-  Widget buildTodoList() {
-    return new ListView.builder(
-      itemBuilder: (context, index) {
-        if (index < todoList.length) {
-          return buildTodoItem(todoList[index], index);
-        }
-      },
-    );
-  }
-
-  Widget buildTodoItem(todoText, int index) {
-    return new ListTile(
-      title: new Text(todoText),
-      onTap: removeToDoItem(index),
-    );
-  }
 }
 
 class ToDoWidget extends StatefulWidget {
@@ -216,4 +176,48 @@ class ToDoState extends State<ToDoWidget> {
       child: todoCart,
     );
   }
+
+  removeTodoItem(int index) {
+    setState(() => todoList.removeAt(index));
+  }
+
+  promptRemoveToDoItem(int index) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return new AlertDialog(
+              title: new Text('Mark "${todoList[index]}" as done?}'),
+              backgroundColor: Colors.orange,
+              actions: <Widget>[
+                new FlatButton(
+                    child: new Text('CANCEL'),
+                    onPressed: () => Navigator.of(context).pop()),
+                new FlatButton(
+                    child: new Text('MARK AS DONE'),
+                    onPressed: () {
+                      removeTodoItem(index);
+                      Navigator.of(context).pop();
+                    })
+              ]);
+        });
+  }
+
+  Widget buildTodoList() {
+    return new ListView.builder(
+      itemBuilder: (context, index) {
+        if (index < todoList.length) {
+          return buildTodoItem(todoList[index], index);
+        }
+      },
+    );
+  }
+
+  Widget buildTodoItem(todoText, int index) {
+    return new ListTile(
+      title: new Text(todoText),
+      onTap: promptRemoveToDoItem(index),
+    );
+  }
+
+
 }
