@@ -108,8 +108,6 @@ class ViewTaskScreenState extends State<ViewTasksScreen> {
       ),
     ));
   }
-
-
 }
 
 class ToDoWidget extends StatefulWidget {
@@ -177,16 +175,16 @@ class ToDoState extends State<ToDoWidget> {
     );
   }
 
-  removeTodoItem(int index) {
+  void removeTodoItem(int index) {
     setState(() => todoList.removeAt(index));
   }
 
-  promptRemoveToDoItem(int index) {
+  void promptRemoveToDoItem(int index) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
           return new AlertDialog(
-              title: new Text('Mark "${todoList[index]}" as done?}'),
+              title: new Text('Mark "${todoList[index]}" as done?'),
               backgroundColor: Colors.orange,
               actions: <Widget>[
                 new FlatButton(
@@ -208,16 +206,13 @@ class ToDoState extends State<ToDoWidget> {
         if (index < todoList.length) {
           return buildTodoItem(todoList[index], index);
         }
+        return Container();
       },
     );
   }
 
   Widget buildTodoItem(todoText, int index) {
     return new ListTile(
-      title: new Text(todoText),
-      onTap: promptRemoveToDoItem(index),
-    );
+        title: new Text(todoText), onTap: () => promptRemoveToDoItem(index));
   }
-
-
 }
